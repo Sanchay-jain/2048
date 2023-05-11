@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () =>  {
         let arr=[]
         for(let j =0;j<size;j++)
           arr.push(squares[i+j].innerHTML)
-        let row =arr.map((a)=>parseInt(a))
+        let row =arr.map((a)=>parseInt(a))                            
         let filteredRow = row.filter(num => num)
         let missing = size - filteredRow.length
-        let zeros = Array(missing).fill(0)
-        let newRow = zeros.concat(filteredRow)
+        let zeros = Array(missing).fill(0)                                  
+        let newRow = zeros.concat(filteredRow)                           // 0 2 0 2 0  becomes 0 0 0 2 2     
         for(let j =0;j<size;j++)
          squares[i+j].innerHTML = newRow[j]
       }
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     {
      for (let i =0; i < size*size-1; i++) {
       if ((i % size !== size-1) && squares[i].innerHTML === squares[i + 1].innerHTML) {
-        let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i + 1].innerHTML)
+        let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i + 1].innerHTML)    //combining from left to right
         squares[i].innerHTML = combinedTotal
         squares[i + 1].innerHTML = 0
         score += combinedTotal
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     {
      for (let i =size*size-1; i>0; i--) {
       if ((i % size !== 0) && squares[i].innerHTML === squares[i-1].innerHTML) {
-        let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i - 1].innerHTML)
+        let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i - 1].innerHTML)   //combining from right to left
         squares[i].innerHTML = combinedTotal
         squares[i - 1].innerHTML = 0
         score += combinedTotal
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
     else if(dir==='down')
      for (let i =size*size-1; i>=size ; i--) {
       if (squares[i].innerHTML === squares[i - size].innerHTML) {
-        let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i - size].innerHTML)
+        let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i - size].innerHTML)  
         squares[i].innerHTML = combinedTotal
         squares[i - size].innerHTML = 0
         score += combinedTotal
