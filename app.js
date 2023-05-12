@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
        squares[i+j*size].innerHTML = newColumn[j]
     }
   }
-
+ 
   function combineRow(dir) {
     if(dir==='left')
     {
@@ -171,44 +171,68 @@ document.addEventListener('DOMContentLoaded', () =>  {
     }
   }
   document.addEventListener('keyup', control)
+  
+  //UNDO
+  const undoButton = document.getElementById("undo")
+  undoButton.addEventListener('click', function(){
+    for(let i =0;i<size*size;i++)
+    {
+      squares[i].innerHTML=previous[i]
+    }
+  })
 
+  let previous=[]
+  function buildPrevious(){
+    for(let i =0;i<size*size;i++)
+    {
+      previous[i] = squares[i].innerHTML
+    }
+  }
+   
   function keyRight() {
-    let previous = JSON.stringify(squares.map(num => num.innerHTML))  // get the numbers on the grid 
+    let previous1 = JSON.stringify(squares.map(num => num.innerHTML))  // get the numbers on the grid 
+    buildPrevious()
     moveRight()
     combineRow('right')
-    moveRight()
+    moveRight() 
     let now = JSON.stringify(squares.map(num => num.innerHTML))
-    if (previous != now)                               //Check for invalid move(game state unchanged)
+    if (previous1 != now)                               //Check for invalid move(game state unchanged)
     { generate() }
   }
 
   function keyLeft() {
-    let previous = JSON.stringify(squares.map(num => num.innerHTML))
+    let previous1 = JSON.stringify(squares.map(num => num.innerHTML))
+    
+    buildPrevious()
     moveLeft()
     combineRow('left')
     moveLeft()
     let now = JSON.stringify(squares.map(num => num.innerHTML))
-    if (previous != now) 
+    if (previous1 != now) 
     { generate() }
   }
 
   function keyUp() {
-    let previous = JSON.stringify(squares.map(num => num.innerHTML))
+    let previous1 = JSON.stringify(squares.map(num => num.innerHTML))
+    
+    buildPrevious()
     moveUp()
     combineColumn('up')
     moveUp()
     let now = JSON.stringify(squares.map(num => num.innerHTML))
-    if (previous != now) 
+    if (previous1 != now) 
     { generate() }
   }
 
   function keyDown() {
-    let previous = JSON.stringify(squares.map(num => num.innerHTML))
+    let previous1 = JSON.stringify(squares.map(num => num.innerHTML))
+    
+    buildPrevious()
     moveDown()
     combineColumn('down')
     moveDown()
     let now = JSON.stringify(squares.map(num => num.innerHTML))
-    if (previous != now) 
+    if (previous1 != now) 
     { generate() }
   }
 
